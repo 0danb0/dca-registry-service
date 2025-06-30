@@ -1,3 +1,8 @@
 spring:
   application:
     name: dca-registry-service
+
+security:
+  licensed-apps:
+    - local-postman
+    - dev
