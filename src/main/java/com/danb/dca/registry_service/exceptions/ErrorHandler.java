@@ -100,7 +100,7 @@ public class ErrorHandler implements RequestBodyAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public final CommonErrorResponse handleValidationException(Exception ex, HttpServletRequest request) {
 
-        log.error("MethodArgumentNotValidException: ", ex);
+//        log.error("MethodArgumentNotValidException: ", ex);
 
         Map<String, String> fieldsMap = new HashMap<>();
 

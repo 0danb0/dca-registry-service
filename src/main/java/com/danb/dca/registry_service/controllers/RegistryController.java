@@ -1,5 +1,7 @@
 package com.danb.dca.registry_service.controllers;
 
+import com.danb.dca.registry_service.mappers.RequestsMapper;
+import com.danb.dca.registry_service.models.dto.RegistryDTO;
 import com.danb.dca.registry_service.models.request.RegistryAuthRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +18,13 @@ import static com.danb.dca.registry_service.utils.ConstantStrings.HEADER_APP_KEY
 @RequiredArgsConstructor
 public class RegistryController {
 
-    @PostMapping(value = "/registry/auth")
-    public ResponseEntity<Object> auth(@RequestHeader(HEADER_APP_KEY_NAME_STRING) String appHeader, @Valid @RequestBody RegistryAuthRequest registryAuthRequest){
-        log.info("- Auth - START");
+    private final RequestsMapper requestsMapper;
 
+    @PostMapping(value = "/registry/auth")
+    public ResponseEntity<Object> auth(@RequestHeader(HEADER_APP_KEY_NAME_STRING) String appHeader,
+            @Valid @RequestBody RegistryAuthRequest registryAuthRequest){
+        log.info("- Auth - START");
+        RegistryDTO registryDTO = requestsMapper.fromAuthRequestToRegistryDto(registryAuthRequest);
         log.info("- Auth - END");
         return new ResponseEntity<>(HttpStatus.OK);
     }

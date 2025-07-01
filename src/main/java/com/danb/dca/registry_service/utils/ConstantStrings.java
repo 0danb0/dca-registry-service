@@ -8,7 +8,14 @@ public interface ConstantStrings {
     String HEADER_APP_KEY_NAME_STRING = "X-APP-KEY";
 
     // ==============================
-    // Database key
+    // Common messages
+    // ==============================
+    String PATTERN_APPLICATION_ID_MESSAGE = "Application not authorized";
+    String NOT_NULL_APPLICATION_ID_MESSAGE = "ApplicationId couldn't be null";
+    String NOT_NULL_EMAIL_MESSAGE = "Email couldn't be null";
+
+    // ==============================
+    // Database keys
     // ==============================
     String PK_KEY = "pk";
     String SK_KEY = "sk";
