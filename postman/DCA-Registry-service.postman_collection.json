@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "56282dde-2d91-4ab3-86bf-52b3b3a19971",
+		"name": "DCA-Registry-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23891502",
+		"_collection_link": "https://medusa-0894.postman.co/workspace/ProgettoMedusa~6ab5bc17-4728-45e6-86d0-4fe7f410c9d5/collection/23891502-56282dde-2d91-4ab3-86bf-52b3b3a19971?action=share&source=collection_link&creator=23891502"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-APP-KEY",
+						"value": "local-postman",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"9\",\r\n    \"name\":\"test\",\r\n    \"email\":\"pepep@mnvskf.com\",\r\n    \"password\":\"\",\r\n    \"role\":\"admin\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/registry/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"registry",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
