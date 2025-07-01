@@ -26,6 +26,8 @@ public class InternalService {
     public InternalRegistryInsertResponse insertRegistryEntry(RegistryDTO registryDTO){
         log.info("- Internal Service - insertRegistryEntry - START");
 
+        //pk con nome applicazione sk con nome recuperato da email
+
         log.info("- Internal Service - insertRegistryEntry - DONE");
         return InternalRegistryInsertResponse.builder().build();
     }

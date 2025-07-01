@@ -1,5 +1,7 @@
 package com.danb.dca.registry_service.exceptions;
 
+import com.danb.dca.registry_service.controllers.InternalController;
+import com.danb.dca.registry_service.controllers.RegistryController;
 import com.danb.dca.registry_service.enums.ConstantEnum;
 import com.danb.dca.registry_service.enums.DomainMsg;
 import com.danb.dca.registry_service.enums.ErrorMsg;
@@ -40,7 +42,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Setter
-@RestControllerAdvice(assignableTypes = {})
+@RestControllerAdvice(assignableTypes = {InternalController.class, RegistryController.class})
 public class ErrorHandler implements RequestBodyAdvice {
 
     private static final ThreadLocal<ErrorHandler> requestInfoThreadLocal = new ThreadLocal<>();

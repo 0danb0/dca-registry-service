@@ -17,15 +17,8 @@ public interface RequestsMapper {
     @Mapping(target = "userUuid", expression = "java(UUID.randomUUID().toString())")
     @Mapping(target = "active", expression = "java(\"false\")")
     RegistryDTO fromAuthRequestToRegistryDto(RegistryAuthRequest registryAuthRequest);
-
-    @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
     RegistryDTO fromIntUpdateRequestToRegistryDto(InternalRegistryUpdateRequest internalRegistryUpdateRequest);
-
-    @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
-    @Mapping(target = "creationDate", expression = "java(Instant.now().toString())")
     RegistryDTO fromIntInsertRequestToRegistryDto(InternalRegistryInsertRequest internalRegistryInsertRequest);
-
-    @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
     RegistryDTO fromIntDeleteRequestToRegistryDto(InternalRegistryDeleteRequest internalRegistryDeleteRequest);
 
     @Mapping(target = "pk", expression = "java(pk)")

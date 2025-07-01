@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
-
 import static com.danb.dca.registry_service.utils.ConstantStrings.*;
 
 @Data

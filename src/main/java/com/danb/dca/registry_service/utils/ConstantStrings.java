@@ -12,8 +12,10 @@ public interface ConstantStrings {
     // Common messages
     // ==============================
     String PATTERN_APPLICATION_ID_MESSAGE = "Application not authorized";
+    String PATTERN_ACTIVE_MESSAGE = "Active value is invalid";
     String NOT_NULL_APPLICATION_ID_MESSAGE = "ApplicationId couldn't be null";
     String NOT_NULL_EMAIL_MESSAGE = "Email couldn't be null";
+    String INVALID_EMAIL_MESSAGE = "Invalid email";
 
     // ==============================
     // Database keys

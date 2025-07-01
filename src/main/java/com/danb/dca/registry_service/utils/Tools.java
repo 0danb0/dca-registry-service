@@ -42,6 +42,7 @@ public class Tools {
     public String extractUserFromEmail(String email){
         return email.split("@")[0];
     }
+
     public String createPk(String value) {
         return String.join("#", ROOT_PK, value, APPENDIX_PK);
     }

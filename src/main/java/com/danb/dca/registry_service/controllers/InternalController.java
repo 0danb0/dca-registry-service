@@ -44,7 +44,7 @@ public class InternalController {
     }
 
     @PostMapping("/registry")
-    @PreAuthorize("hasAuthority('ROLE_big-mtf-boss-bb')")
+//    @PreAuthorize("hasAuthority('ROLE_big-mtf-boss-bb')")
     public ResponseEntity<InternalRegistryInsertResponse> insertRegistry(@RequestHeader(HEADER_APP_INTERNAL_KEY_NAME_STRING) String appHeader,
              @Valid @RequestBody InternalRegistryInsertRequest internalRegistryInsertRequest) throws RegistryException {
         log.info("- Internal Controller - insertRegistry - START");

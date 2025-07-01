@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 import static com.danb.dca.registry_service.utils.ConstantStrings.*;
 
 @Data
@@ -36,5 +38,5 @@ public class RegistryPO {
     @DynamoDBAttribute(attributeName = ACTIVE_KEY)
     private String active;
     @DynamoDBAttribute(attributeName = ROLES_KEY)
-    private String roles;
+    private List<String> roles;
 }
