@@ -36,7 +36,7 @@ public class RegistryRepository {
         log.info("DynamoDBMapper initialized for table: {}", dynamoDBProperties.getTable());
     }
 
-    public void isRegistryDtoPresentByPk(String pk) throws RegistryException {
+    public boolean isRegistryDtoPresentByPk(String pk) throws RegistryException {
         DynamoDBQueryExpression<RegistryPO> query = new DynamoDBQueryExpression<RegistryPO>()
                 .withHashKeyValues(
                         RegistryPO.builder().pk(pk).build()
@@ -44,24 +44,9 @@ public class RegistryRepository {
 
         List<RegistryPO> results = dynamoDBMapper.query(RegistryPO.class, query);
 
-        if(results.isEmpty()) {
-            throw new RegistryException(
-                    ErrorMsg.DCA_RGT_SRV_02.getCode(),
-                    ErrorMsg.DCA_RGT_SRV_02.getMessage(),
-                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
-                    ErrorMsg.DCA_RGT_SRV_02.getCode()
-            );
-        }
+        checkRegistryResultsEmptyAndActive(results);
 
-        if(Boolean.getBoolean(results.get(0).getActive())){
-            throw new RegistryException(
-                    ErrorMsg.DCA_RGT_SRV_03.getCode(),
-                    ErrorMsg.DCA_RGT_SRV_03.getMessage(),
-                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
-                    ErrorMsg.DCA_RGT_SRV_03.getCode()
-            );
-        }
-
+        return true;
     }
 
     public void insert(RegistryPO invoicePO) {
@@ -71,4 +56,25 @@ public class RegistryRepository {
     public void delete(RegistryPO invoicePO) {
         dynamoDBMapper.delete(invoicePO);
     }
+
+    private static void checkRegistryResultsEmptyAndActive(List<RegistryPO> results) throws RegistryException {
+        if(results.isEmpty()) {
+            throw new RegistryException(
+                    ErrorMsg.DCA_RGT_SRV_02.getCode(),
+                    ErrorMsg.DCA_RGT_SRV_02.getMessage(),
+                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
+                    ErrorMsg.DCA_RGT_SRV_02.getCode()
+            );
+        }
+
+        if(!Boolean.getBoolean(results.get(0).getActive())){
+            throw new RegistryException(
+                    ErrorMsg.DCA_RGT_SRV_03.getCode(),
+                    ErrorMsg.DCA_RGT_SRV_03.getMessage(),
+                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
+                    ErrorMsg.DCA_RGT_SRV_03.getCode()
+            );
+        }
+    }
+
 }

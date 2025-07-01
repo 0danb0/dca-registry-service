@@ -1,4 +1,4 @@
-package com.danb.dca.registry_service.utils;
+package com.danb.dca.registry_service.helper;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.*;
@@ -13,14 +13,15 @@ public class AuthHelper {
     private final JwtEncoder jwtEncoder;
     private final JwtDecoder jwtDecoder;
 
-    public String createUserToken(String email, String applicationId) {
+    public String createUserToken(String email, String applicationId, String isActive) {
         JwtClaimsSet jwtClaimsSet = JwtClaimsSet.builder()
                 .issuer("self")
                 .issuedAt(Instant.now())
                 .expiresAt(Instant.now().plusSeconds(60 * 30))
                 .subject(email)
                 .claim("role", "user")
-                .claim("application_id", "applicationId")
+                .claim("application_id", applicationId)
+                .claim("isActive", isActive)
                 .build();
         return jwtEncoder.encode(JwtEncoderParameters.from(jwtClaimsSet)).getTokenValue();
     }

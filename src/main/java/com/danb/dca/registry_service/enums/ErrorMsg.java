@@ -11,6 +11,8 @@ public enum ErrorMsg {
 
     DCA_RGT_SRV_03("DCA-RGT-SRV-03", "User not active", "Inactive email, contact support."),
 
+    DCA_RGT_SRV_04("DCA-RGT-SRV-04", "Problem retrieving auth token", "Contact support."),
+
     DCA_RGT_SRV_99("DCA-RGT-SRV-99", "Generic error", "");
 
     private final String code;

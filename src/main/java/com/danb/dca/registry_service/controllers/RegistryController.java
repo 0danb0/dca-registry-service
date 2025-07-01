@@ -27,12 +27,12 @@ public class RegistryController {
     @PostMapping(value = "/registry/auth")
     public ResponseEntity<Object> auth(@RequestHeader(HEADER_APP_KEY_NAME_STRING) String appHeader,
             @Valid @RequestBody RegistryAuthRequest registryAuthRequest) throws RegistryException {
-        log.info("- Auth - START");
+        log.info("- Auth Controller - START");
 
         RegistryDTO registryDTO = requestsMapper.fromAuthRequestToRegistryDto(registryAuthRequest);
         RegistryAuthResponse registryAuthResponse = registryService.auth(registryDTO);
 
-        log.info("- Auth - END");
+        log.info("- Auth Controller - END");
         return new ResponseEntity<>(registryAuthResponse,HttpStatus.OK);
     }
 }
