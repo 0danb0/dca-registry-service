@@ -8,8 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-import static com.danb.dca.product_serivce.utils.ConstantStrings.APPENDIX_PK;
-import static com.danb.dca.product_serivce.utils.ConstantStrings.ROOT_PK;
+import static com.danb.dca.registry_service.utils.ConstantStrings.APPENDIX_PK;
+import static com.danb.dca.registry_service.utils.ConstantStrings.ROOT_PK;
+
 
 @Component
 public class Tools {

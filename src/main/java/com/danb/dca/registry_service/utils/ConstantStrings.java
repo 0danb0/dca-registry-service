@@ -20,4 +20,6 @@ public interface ConstantStrings {
     String EMAIL_KEY = "application_id";
     String PASSWORD_KEY = "password";
     String ACTIVE_KEY = "active";
+    String ROOT_PK = "danb";
+    String APPENDIX_PK = "registry";
 }
