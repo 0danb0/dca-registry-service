@@ -7,5 +7,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @Builder
 @EqualsAndHashCode(callSuper = true)
-public class RegistryAuthResponse extends RestResponse{
+public class RegistryAuthResponse extends RestResponse {
+    private String token;
 }

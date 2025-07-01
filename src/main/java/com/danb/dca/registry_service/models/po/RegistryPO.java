@@ -33,8 +33,6 @@ public class RegistryPO {
     private String applicationId;
     @DynamoDBAttribute(attributeName = EMAIL_KEY)
     private String email;
-    @DynamoDBAttribute(attributeName = PASSWORD_KEY)
-    private String password;
     @DynamoDBAttribute(attributeName = ACTIVE_KEY)
     private String active;
 }

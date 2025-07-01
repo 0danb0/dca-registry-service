@@ -17,7 +17,7 @@ import static com.danb.dca.registry_service.utils.ConstantStrings.*;
 public class RegistryAuthRequest {
     private static final String EMAIL = "email";
     private static final String APPLICATION_ID = "application_id";
-    private static final String PATTERN_APPLICATION_ID = "dca-react-app | local-postman";
+    private static final String PATTERN_APPLICATION_ID = "dca-react-app|local-postman";
 
     @Email
     @NotNull(message = NOT_NULL_EMAIL_MESSAGE)

@@ -24,7 +24,7 @@ public interface ConstantStrings {
     String UPDATE_DATE_KEY = "update_date";
     String LAST_ACCESS_DATE_KEY = "last_access_date";
     String APPLICATION_ID_KEY = "application_id";
-    String EMAIL_KEY = "application_id";
+    String EMAIL_KEY = "email_id";
     String PASSWORD_KEY = "password";
     String ACTIVE_KEY = "active";
     String ROOT_PK = "danb";
