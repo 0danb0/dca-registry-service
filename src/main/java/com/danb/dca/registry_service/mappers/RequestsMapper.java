@@ -2,6 +2,9 @@ package com.danb.dca.registry_service.mappers;
 
 import com.danb.dca.registry_service.models.dto.RegistryDTO;
 import com.danb.dca.registry_service.models.po.RegistryPO;
+import com.danb.dca.registry_service.models.request.InternalRegistryDeleteRequest;
+import com.danb.dca.registry_service.models.request.InternalRegistryInsertRequest;
+import com.danb.dca.registry_service.models.request.InternalRegistryUpdateRequest;
 import com.danb.dca.registry_service.models.request.RegistryAuthRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,6 +17,16 @@ public interface RequestsMapper {
     @Mapping(target = "userUuid", expression = "java(UUID.randomUUID().toString())")
     @Mapping(target = "active", expression = "java(\"false\")")
     RegistryDTO fromAuthRequestToRegistryDto(RegistryAuthRequest registryAuthRequest);
+
+    @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
+    RegistryDTO fromIntUpdateRequestToRegistryDto(InternalRegistryUpdateRequest internalRegistryUpdateRequest);
+
+    @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
+    @Mapping(target = "creationDate", expression = "java(Instant.now().toString())")
+    RegistryDTO fromIntInsertRequestToRegistryDto(InternalRegistryInsertRequest internalRegistryInsertRequest, String pk, String sk);
+
+    @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
+    RegistryDTO fromIntDeleteRequestToRegistryDto(InternalRegistryDeleteRequest internalRegistryDeleteRequest);
 
     @Mapping(target = "pk", expression = "java(pk)")
     @Mapping(target = "sk", expression = "java(sk)")

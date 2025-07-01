@@ -13,4 +13,5 @@ import java.util.List;
 @ConfigurationProperties(prefix = "security")
 public class SecurityProperties {
     private List<String> licensedApps;
+    private List<String> licensedInternalApps;
 }

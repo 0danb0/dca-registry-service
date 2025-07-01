@@ -6,6 +6,8 @@ security:
   licensed-apps:
     - local-postman
     - dev
+  licensed-internal-apps:
+    - internal
 
 aws:
   dynamodb:

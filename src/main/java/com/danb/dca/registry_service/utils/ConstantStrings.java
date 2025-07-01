@@ -6,6 +6,7 @@ public interface ConstantStrings {
     // ==============================
     String APPLICATION_NAME_STRING = "dca-registry-service";
     String HEADER_APP_KEY_NAME_STRING = "X-APP-KEY";
+    String HEADER_APP_INTERNAL_KEY_NAME_STRING = "X-INTERNAL-APP-KEY";
 
     // ==============================
     // Common messages

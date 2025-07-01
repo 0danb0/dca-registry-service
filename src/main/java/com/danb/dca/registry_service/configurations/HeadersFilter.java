@@ -12,6 +12,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import static com.danb.dca.registry_service.utils.ConstantStrings.HEADER_APP_INTERNAL_KEY_NAME_STRING;
 import static com.danb.dca.registry_service.utils.ConstantStrings.HEADER_APP_KEY_NAME_STRING;
 
 @Slf4j
@@ -29,13 +30,30 @@ public class HeadersFilter extends OncePerRequestFilter {
         }
 
         String appKey = request.getHeader(HEADER_APP_KEY_NAME_STRING);
+        String appInternalKey = request.getHeader(HEADER_APP_INTERNAL_KEY_NAME_STRING);
 
-        if (appKey == null || !securityProperties.getLicensedApps().contains(appKey)) {
-            log.error("Internal filter - Header retrieved is invalid -> {}", appKey);
+        // Controlla che sia presente **solo uno** dei due header
+        if ((appKey == null && appInternalKey == null) || (appKey != null && appInternalKey != null)) {
+            log.error("Internal filter - Headers missing or both present. appKey: {}, appInternalKey: {}", appKey, appInternalKey);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        log.debug("Internal filter - Header retrieved from request -> {}", appKey);
+
+        // Controlla validità appKey
+        if (appKey != null && !securityProperties.getLicensedApps().contains(appKey)) {
+            log.error("Internal filter - Invalid appKey header -> {}", appKey);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        // Controlla validità appInternalKey
+        if (appInternalKey != null && !securityProperties.getLicensedInternalApps().contains(appInternalKey)) {
+            log.error("Internal filter - Invalid appInternalKey header -> {}", appInternalKey);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        log.debug("Internal filter - Header valid");
         filterChain.doFilter(request, response);
     }
 }
