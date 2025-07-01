@@ -2,6 +2,7 @@ package com.danb.dca.registry_service.controllers;
 
 import com.danb.dca.registry_service.exceptions.RegistryException;
 import com.danb.dca.registry_service.mappers.RequestsMapper;
+import com.danb.dca.registry_service.models.dto.RegistryDTO;
 import com.danb.dca.registry_service.models.request.InternalRegistryDeleteRequest;
 import com.danb.dca.registry_service.models.request.InternalRegistryInsertRequest;
 import com.danb.dca.registry_service.models.request.InternalRegistryUpdateRequest;
@@ -35,8 +36,11 @@ public class InternalController {
              @Valid @RequestBody InternalRegistryUpdateRequest internalRegistryUpdateRequest) throws RegistryException {
         log.info("- Internal Controller - updateRegistry - START");
 
+        RegistryDTO registryDTO = requestsMapper.fromIntUpdateRequestToRegistryDto(internalRegistryUpdateRequest);
+        InternalRegistryUpdateResponse internalRegistryUpdateResponse = internalService.updateRegistryEntry(registryDTO);
+
         log.info("- Internal Controller - updateRegistry  - DONE");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(internalRegistryUpdateResponse,HttpStatus.OK);
     }
 
     @PostMapping("/registry")
@@ -45,8 +49,11 @@ public class InternalController {
              @Valid @RequestBody InternalRegistryInsertRequest internalRegistryInsertRequest) throws RegistryException {
         log.info("- Internal Controller - insertRegistry - START");
 
+        RegistryDTO registryDTO = requestsMapper.fromIntInsertRequestToRegistryDto(internalRegistryInsertRequest);
+        InternalRegistryInsertResponse internalRegistryInsertResponse = internalService.insertRegistryEntry(registryDTO);
+
         log.info("- Internal Controller - insertRegistry - DONE");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(internalRegistryInsertResponse,HttpStatus.OK);
     }
 
     @DeleteMapping("/registry")
@@ -55,8 +62,11 @@ public class InternalController {
              @Valid @RequestBody InternalRegistryDeleteRequest internalRegistryDeleteRequest) throws RegistryException {
         log.info("- Internal Controller - deleteRegistry - START");
 
+        RegistryDTO registryDTO = requestsMapper.fromIntDeleteRequestToRegistryDto(internalRegistryDeleteRequest);
+        InternalRegistryDeleteResponse internalRegistryDeleteResponse = internalService.deleteRegistryEntry(registryDTO);
+
         log.info("- Internal Controller - deleteRegistry - DONE");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(internalRegistryDeleteResponse,HttpStatus.OK);
     }
 
 }

@@ -35,4 +35,6 @@ public class RegistryPO {
     private String email;
     @DynamoDBAttribute(attributeName = ACTIVE_KEY)
     private String active;
+    @DynamoDBAttribute(attributeName = ROLES_KEY)
+    private String roles;
 }

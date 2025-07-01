@@ -28,6 +28,7 @@ public interface ConstantStrings {
     String EMAIL_KEY = "email_id";
     String PASSWORD_KEY = "password";
     String ACTIVE_KEY = "active";
+    String ROLES_KEY = "roles";
     String ROOT_PK = "danb";
     String APPENDIX_PK = "registry";
 }

@@ -23,7 +23,7 @@ public interface RequestsMapper {
 
     @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
     @Mapping(target = "creationDate", expression = "java(Instant.now().toString())")
-    RegistryDTO fromIntInsertRequestToRegistryDto(InternalRegistryInsertRequest internalRegistryInsertRequest, String pk, String sk);
+    RegistryDTO fromIntInsertRequestToRegistryDto(InternalRegistryInsertRequest internalRegistryInsertRequest);
 
     @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
     RegistryDTO fromIntDeleteRequestToRegistryDto(InternalRegistryDeleteRequest internalRegistryDeleteRequest);

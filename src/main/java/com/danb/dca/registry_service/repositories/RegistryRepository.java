@@ -9,6 +9,7 @@ import com.danb.dca.registry_service.enums.ErrorMsg;
 import com.danb.dca.registry_service.exceptions.RegistryException;
 import com.danb.dca.registry_service.models.po.RegistryPO;
 import com.danb.dca.registry_service.properties.DynamoDBProperties;
+import com.danb.dca.registry_service.utils.Tools;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RegistryRepository {
 
+    private final Tools tools;
     private final AmazonDynamoDB client;
     private final DynamoDBProperties dynamoDBProperties;
     private DynamoDBMapper dynamoDBMapper;
@@ -36,7 +38,22 @@ public class RegistryRepository {
         log.info("DynamoDBMapper initialized for table: {}", dynamoDBProperties.getTable());
     }
 
-    public boolean isRegistryDtoPresentByPk(String pk) throws RegistryException {
+    public boolean canLogin(String pk) throws RegistryException {
+        DynamoDBQueryExpression<RegistryPO> query = new DynamoDBQueryExpression<RegistryPO>()
+                .withHashKeyValues(
+                        RegistryPO.builder().pk(pk).build()
+                );
+
+        List<RegistryPO> results = dynamoDBMapper.query(RegistryPO.class, query);
+        checkRegistryResultsIsEmpty(results);
+
+        RegistryPO registryPO = results.get(0);
+        checkRegistryResultIsActive(registryPO);
+
+        return true;
+    }
+
+    public void updateLastAccessDate(String pk){
         DynamoDBQueryExpression<RegistryPO> query = new DynamoDBQueryExpression<RegistryPO>()
                 .withHashKeyValues(
                         RegistryPO.builder().pk(pk).build()
@@ -44,9 +61,11 @@ public class RegistryRepository {
 
         List<RegistryPO> results = dynamoDBMapper.query(RegistryPO.class, query);
 
-        checkRegistryResultsEmptyAndActive(results);
+        RegistryPO registryPO = results.get(0);
+        delete(registryPO);
 
-        return true;
+        registryPO.setLastAccessDate(tools.getInstant());
+        insert(registryPO);
     }
 
     public void insert(RegistryPO invoicePO) {
@@ -57,7 +76,18 @@ public class RegistryRepository {
         dynamoDBMapper.delete(invoicePO);
     }
 
-    private static void checkRegistryResultsEmptyAndActive(List<RegistryPO> results) throws RegistryException {
+    private static void checkRegistryResultIsActive(RegistryPO registryPO ) throws RegistryException {
+        if(!Boolean.getBoolean(registryPO.getActive())){
+            throw new RegistryException(
+                    ErrorMsg.DCA_RGT_SRV_03.getCode(),
+                    ErrorMsg.DCA_RGT_SRV_03.getMessage(),
+                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
+                    ErrorMsg.DCA_RGT_SRV_03.getCode()
+            );
+        }
+    }
+
+    private static void checkRegistryResultsIsEmpty(List<RegistryPO> results) throws RegistryException {
         if(results.isEmpty()) {
             throw new RegistryException(
                     ErrorMsg.DCA_RGT_SRV_02.getCode(),
@@ -67,14 +97,6 @@ public class RegistryRepository {
             );
         }
 
-        if(!Boolean.getBoolean(results.get(0).getActive())){
-            throw new RegistryException(
-                    ErrorMsg.DCA_RGT_SRV_03.getCode(),
-                    ErrorMsg.DCA_RGT_SRV_03.getMessage(),
-                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
-                    ErrorMsg.DCA_RGT_SRV_03.getCode()
-            );
-        }
     }
 
 }

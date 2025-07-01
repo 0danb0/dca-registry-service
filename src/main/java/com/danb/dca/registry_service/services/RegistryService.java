@@ -28,8 +28,9 @@ public class RegistryService {
         String pk = tools.createPk(user);
 
         String authToken = "";
-        if(registryRepository.isRegistryDtoPresentByPk(pk)) {
+        if(registryRepository.canLogin(pk)) {
             authToken = authHelper.createUserToken(registryDTO.getEmail(), registryDTO.getApplicationId(), "true");
+            registryRepository.updateLastAccessDate(pk);
         }
 
         if(authToken.isEmpty()){
