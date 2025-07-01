@@ -1,8 +1,17 @@
 spring:
   application:
-    name: dca-registry-service
+    name: "dca-registry-service"
 
 security:
   licensed-apps:
     - local-postman
     - dev
+
+aws:
+  dynamodb:
+    region: "us-east-1"
+    endpoint: "http://localhost:4566"
+    table: "invoice"
+    keys:
+      access: "test"
+      secret: "test"
