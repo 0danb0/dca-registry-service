@@ -53,6 +53,36 @@ public class RegistryRepository {
         return true;
     }
 
+    public RegistryPO checkUserIsPresentAndRetrieve(String pk, String sk) throws RegistryException  {
+        RegistryPO registryPO = dynamoDBMapper.load(RegistryPO.class, pk, sk);
+
+        if(!registryPO.isEmpty()){
+            throw new RegistryException(
+                    ErrorMsg.DCA_RGT_SRV_05.getCode(),
+                    ErrorMsg.DCA_RGT_SRV_05.getMessage(),
+                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
+                    ErrorMsg.DCA_RGT_SRV_05.getCode()
+            );
+
+        }else{
+            return registryPO;
+        }
+    }
+
+    public void checkUserIsPresent(String pk, String sk) throws RegistryException  {
+        RegistryPO registryPO = dynamoDBMapper.load(RegistryPO.class, pk, sk);
+
+        if(!registryPO.isEmpty()){
+            throw new RegistryException(
+                    ErrorMsg.DCA_RGT_SRV_05.getCode(),
+                    ErrorMsg.DCA_RGT_SRV_05.getMessage(),
+                    DomainMsg.REGISTRY_SERVICE_TECHNICAL.getName(),
+                    ErrorMsg.DCA_RGT_SRV_05.getCode()
+            );
+
+        }
+    }
+
     public void updateLastAccessDate(String pk){
         DynamoDBQueryExpression<RegistryPO> query = new DynamoDBQueryExpression<RegistryPO>()
                 .withHashKeyValues(
@@ -68,12 +98,12 @@ public class RegistryRepository {
         insert(registryPO);
     }
 
-    public void insert(RegistryPO invoicePO) {
-        dynamoDBMapper.save(invoicePO);
+    public void insert(RegistryPO registryPO) {
+        dynamoDBMapper.save(registryPO);
     }
 
-    public void delete(RegistryPO invoicePO) {
-        dynamoDBMapper.delete(invoicePO);
+    public void delete(RegistryPO registryPO) {
+        dynamoDBMapper.delete(registryPO);
     }
 
     private static void checkRegistryResultIsActive(RegistryPO registryPO ) throws RegistryException {

@@ -39,4 +39,18 @@ public class RegistryPO {
     private String active;
     @DynamoDBAttribute(attributeName = ROLES_KEY)
     private List<String> roles;
+
+    public boolean isEmpty() {
+        return (pk == null || pk.isBlank()) &&
+                (sk == null || sk.isBlank()) &&
+                (userUuid == null || userUuid.isBlank()) &&
+                (creationDate == null || creationDate.isBlank()) &&
+                (updateDate == null || updateDate.isBlank()) &&
+                (lastAccessDate == null || lastAccessDate.isBlank()) &&
+                (applicationId == null || applicationId.isBlank()) &&
+                (email == null || email.isBlank()) &&
+                (active == null || active.isBlank()) &&
+                (roles == null || roles.isEmpty());
+    }
+
 }

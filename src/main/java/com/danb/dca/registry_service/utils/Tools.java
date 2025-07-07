@@ -1,5 +1,7 @@
 package com.danb.dca.registry_service.utils;
 
+import com.danb.dca.registry_service.models.dto.RegistryDTO;
+import org.apache.commons.lang3.tuple.Pair;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
@@ -45,5 +47,11 @@ public class Tools {
 
     public String createPk(String value) {
         return String.join("#", ROOT_PK, value, APPENDIX_PK);
+    }
+
+    public Pair<String, String> generatePkSk(RegistryDTO dto) {
+        String pk = createPk(dto.getApplicationId());
+        String sk = extractUserFromEmail(dto.getEmail());
+        return Pair.of(pk, sk);
     }
 }

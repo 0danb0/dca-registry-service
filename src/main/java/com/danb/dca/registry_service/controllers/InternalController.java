@@ -31,7 +31,7 @@ public class InternalController {
     private final InternalService internalService;
 
     @PutMapping("/registry")
-    @PreAuthorize("hasAuthority('ROLE_big-mtf-boss-bb')")
+//    @PreAuthorize("hasAuthority('ROLE_big-mtf-boss-bb')")
     public ResponseEntity<InternalRegistryUpdateResponse> updateRegistry(@RequestHeader(HEADER_APP_INTERNAL_KEY_NAME_STRING) String appHeader,
              @Valid @RequestBody InternalRegistryUpdateRequest internalRegistryUpdateRequest) throws RegistryException {
         log.info("- Internal Controller - updateRegistry - START");
@@ -57,7 +57,7 @@ public class InternalController {
     }
 
     @DeleteMapping("/registry")
-    @PreAuthorize("hasAuthority('ROLE_big-mtf-boss-bb')")
+//    @PreAuthorize("hasAuthority('ROLE_big-mtf-boss-bb')")
     public ResponseEntity<InternalRegistryDeleteResponse> deleteRegistry(@RequestHeader(HEADER_APP_INTERNAL_KEY_NAME_STRING) String appHeader,
              @Valid @RequestBody InternalRegistryDeleteRequest internalRegistryDeleteRequest) throws RegistryException {
         log.info("- Internal Controller - deleteRegistry - START");
