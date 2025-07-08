@@ -1,9 +1,6 @@
 package com.danb.dca.registry_service.models.po;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +37,7 @@ public class RegistryPO {
     @DynamoDBAttribute(attributeName = ROLES_KEY)
     private List<String> roles;
 
+    @DynamoDBIgnore
     public boolean isEmpty() {
         return (pk == null || pk.isBlank()) &&
                 (sk == null || sk.isBlank()) &&

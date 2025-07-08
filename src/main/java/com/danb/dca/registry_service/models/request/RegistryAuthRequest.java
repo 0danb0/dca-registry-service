@@ -7,14 +7,18 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 import static com.danb.dca.registry_service.utils.ConstantStrings.*;
 
 @Data
 @Builder
 public class RegistryAuthRequest {
     private static final String EMAIL = "email";
+    private static final String ROLES = "roles";
     private static final String APPLICATION_ID = "application_id";
     private static final String PATTERN_APPLICATION_ID = "dca-react-app|local-postman";
+    private static final String PATTERN_ROLES = "user|master";
 
     @Email
     @NotNull(message = NOT_NULL_EMAIL_MESSAGE)
@@ -25,4 +29,9 @@ public class RegistryAuthRequest {
     @JsonProperty(APPLICATION_ID)
     @Pattern(regexp = PATTERN_APPLICATION_ID, message = PATTERN_APPLICATION_ID_MESSAGE)
     private String applicationId;
+
+    @JsonProperty(ROLES)
+    @NotNull(message = NOT_NULL_ROLE_MESSAGE)
+    @Pattern(regexp = PATTERN_ROLES, message = PATTERN_ROLES_MESSAGE)
+    private List<String> roles;
 }

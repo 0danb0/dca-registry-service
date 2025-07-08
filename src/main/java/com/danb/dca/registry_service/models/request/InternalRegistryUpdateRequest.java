@@ -6,12 +6,16 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+import java.util.List;
+
 import static com.danb.dca.registry_service.utils.ConstantStrings.*;
 import static com.danb.dca.registry_service.utils.ConstantStrings.NOT_NULL_EMAIL_MESSAGE;
 import static com.danb.dca.registry_service.utils.ConstantStrings.PATTERN_ACTIVE_MESSAGE;
 
 @Data
 public class InternalRegistryUpdateRequest {
+    private static final String PATTERN_ROLES = "user|master";
+    private static final String ROLES = "roles";
     private static final String EMAIL = "email";
     private static final String ACTIVE = "active";
     private static final String APPLICATION_ID = "application_id";
@@ -31,4 +35,9 @@ public class InternalRegistryUpdateRequest {
     @JsonProperty(ACTIVE)
     @Pattern(regexp = PATTERN_ACTIVE, message = PATTERN_ACTIVE_MESSAGE)
     private String active;
+
+    @JsonProperty(ROLES)
+    @NotNull(message = NOT_NULL_ROLE_MESSAGE)
+    private List<@Pattern(regexp = PATTERN_ROLES, message = PATTERN_ROLES_MESSAGE) String> roles;
+
 }

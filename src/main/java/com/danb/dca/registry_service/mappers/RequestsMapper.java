@@ -14,16 +14,21 @@ import java.util.UUID;
 public interface RequestsMapper {
 
     @Mapping(target = "userUuid", expression = "java(UUID.randomUUID().toString())")
-    @Mapping(target = "active", expression = "java(\"false\")")
+    @Mapping(target = "lastAccessDate", expression = "java(Instant.now().toString())")
     RegistryDTO fromAuthRequestToRegistryDto(RegistryAuthRequest registryAuthRequest);
+
     @Mapping(target = "userUuid", expression = "java(UUID.randomUUID().toString())")
-    @Mapping(target = "active", expression = "java(\"false\")")
+    @Mapping(target = "lastAccessDate", expression = "java(\"\")")
     RegistryDTO fromIntUpdateRequestToRegistryDto(InternalRegistryUpdateRequest internalRegistryUpdateRequest);
+
     @Mapping(target = "userUuid", expression = "java(UUID.randomUUID().toString())")
-    @Mapping(target = "active", expression = "java(\"false\")")
+    @Mapping(target = "lastAccessDate", expression = "java(\"\")")
     RegistryDTO fromIntInsertRequestToRegistryDto(InternalRegistryInsertRequest internalRegistryInsertRequest);
+
     @Mapping(target = "userUuid", expression = "java(UUID.randomUUID().toString())")
     @Mapping(target = "active", expression = "java(\"false\")")
+    @Mapping(target = "lastAccessDate", expression = "java(\"\")")
+    @Mapping(target = "roles", expression = "java(new ArrayList<>())")
     RegistryDTO fromIntDeleteRequestToRegistryDto(InternalRegistryDeleteRequest internalRegistryDeleteRequest);
 
 }

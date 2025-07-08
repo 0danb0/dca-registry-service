@@ -72,7 +72,7 @@ public class RegistryRepository {
     public void checkUserIsPresent(String pk, String sk) throws RegistryException  {
         RegistryPO registryPO = dynamoDBMapper.load(RegistryPO.class, pk, sk);
 
-        if(!registryPO.isEmpty()){
+        if(registryPO != null && !registryPO.isEmpty()){
             throw new RegistryException(
                     ErrorMsg.DCA_RGT_SRV_05.getCode(),
                     ErrorMsg.DCA_RGT_SRV_05.getMessage(),

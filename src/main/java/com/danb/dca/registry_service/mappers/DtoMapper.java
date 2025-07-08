@@ -14,5 +14,6 @@ public interface DtoMapper {
     @Mapping(target = "sk", expression = "java(sk)")
     @Mapping(target = "updateDate", expression = "java(Instant.now().toString())")
     @Mapping(target = "creationDate", expression = "java(Instant.now().toString())")
+    @Mapping(target = "lastAccessDate", expression = "java(\"\")")
     RegistryPO fromRegistryDtoToPO(RegistryDTO registryDTO, String pk, String sk);
 }
