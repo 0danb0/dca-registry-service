@@ -8,6 +8,54 @@
 	},
 	"item": [
 		{
+			"name": "internal",
+			"item": [
+				{
+					"name": "insertEntry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-INTERNAL-APP-KEY",
+								"value": "internal",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"pepep@mnvskf.com\",\r\n    \"application_id\":\"local-postman\",\r\n    \"active\":\"true\",\r\n    \"roles\":[\"master\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/internal/registry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"internal",
+								"registry"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Auth",
 			"request": {
 				"method": "POST",
@@ -20,7 +68,12 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\":\"9\",\r\n    \"name\":\"test\",\r\n    \"email\":\"pepep@mnvskf.com\",\r\n    \"password\":\"\",\r\n    \"role\":\"admin\"\r\n}"
+					"raw": "{\r\n    \"email\": \"pepep@mnvskf.com\",\r\n    \"application_id\":\"local-postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/registry/auth",
